@@ -53,7 +53,8 @@ CTime* CTime::Create()
 //--------------------------------------------------
 CTime::CTime() :
 	m_time(0),
-	m_switch(0)
+	m_switchTime(0),
+	m_switch(false)
 {
 }
 
@@ -70,13 +71,14 @@ CTime::~CTime()
 void CTime::Init()
 {
 	m_time = 0;
-	m_switch = ERROR_NUMBER;
+	m_switchTime = ERROR_NUMBER;
+	m_switch = false;
 
 	// 初期化
 	CNumberManager::Init();
 
-	D3DXVECTOR3 size = D3DXVECTOR3(50.0f, 100.0f, 0.0f);
-	D3DXVECTOR3 pos = D3DXVECTOR3(((float)CApplication::SCREEN_WIDTH * 0.5f) + (size.x * 0.5f), size.y * 0.65f, 0.0f);
+	D3DXVECTOR3 size = D3DXVECTOR3(75.0f, 150.0f, 0.0f);
+	D3DXVECTOR3 pos = D3DXVECTOR3(((float)CApplication::SCREEN_WIDTH * 0.5f) + (size.x * 0.5f), size.y * 0.5f, 0.0f);
 
 	// 位置の設定
 	CNumberManager::SetPos(pos);
@@ -106,9 +108,14 @@ void CTime::Update()
 		CNumberManager::Add(-1);
 	}
 
+	m_switch = false;
+
 	if (CNumberManager::Get() == 0)
 	{// 時間が来た
-		CNumberManager::Set(m_switch);
+		m_switch = true;
+
+		// 設定
+		CNumberManager::Set(m_switchTime);
 	}
 
 	// 更新
@@ -122,6 +129,14 @@ void CTime::Draw()
 {
 	// 描画
 	CNumberManager::Draw();
+}
+
+//--------------------------------------------------
+// 切り替わったかどうか
+//--------------------------------------------------
+bool CTime::Switch()
+{
+	return m_switch;
 }
 
 //--------------------------------------------------
@@ -159,16 +174,16 @@ void CTime::Load()
 		if (strcmp(read, "SWITCH_SECONDS") == 0)
 		{// 読み込み
 			fscanf(pFile, "%s", &read);
-			fscanf(pFile, "%d", &m_switch);
+			fscanf(pFile, "%d", &m_switchTime);
 		}
 	}
 
 	// ファイルを閉じる
 	fclose(pFile);
 
-	if (m_switch == ERROR_NUMBER)
+	if (m_switchTime == ERROR_NUMBER || m_switchTime <= 0)
 	{// 読み込みが出来ていない
-		MessageBox(hWnd, "切り替わる秒数が読み込めません", "警告！", MB_ICONWARNING);
+		MessageBox(hWnd, "切り替わる秒数が正しく読み込めません", "警告！", MB_ICONWARNING);
 
 		// モードの変更
 		CApplication::GetInstance()->GetFade()->ChangeMode(CMode::MODE_TITLE);
@@ -176,5 +191,5 @@ void CTime::Load()
 	}
 
 	// 設定
-	CNumberManager::Set(m_switch);
+	CNumberManager::Set(m_switchTime);
 }

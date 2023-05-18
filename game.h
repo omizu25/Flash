@@ -15,6 +15,7 @@
 //==================================================
 // 前方宣言
 //==================================================
+class CTime;
 
 //==================================================
 // クラス
@@ -23,13 +24,6 @@ class CGame : public CMode
 {
 	/* 定義 */
 public:
-
-	/* ↓静的メンバ関数↓ */
-public:
-
-	/* ↓静的メンバ変数↓ */
-private:
-	static int m_score;
 
 	/* ↓メンバ関数↓ */
 public:
@@ -42,11 +36,15 @@ public:
 	void Update() override;	// 更新
 	void Draw() override;	// 描画
 
+public:
+	bool Switch();	// 切り替わったかどうか
+
 private:
 	void Input();	// 入力
 
 	/* ↓メンバ変数↓ */
 private:
+	CTime* m_pTime;	// タイムの情報
 };
 
 #endif // !_GAME_H_

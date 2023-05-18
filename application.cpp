@@ -21,7 +21,6 @@
 //==================================================
 namespace
 {
-const bool FULL_SCREEN = false;	// フルスクリーンにするかどうか
 const CMode::EMode START_MODE = CMode::MODE_TITLE;	// 最初のモード
 }
 
@@ -76,7 +75,15 @@ HRESULT CApplication::Init(HINSTANCE hInstance, HWND hWnd)
 		// nullチェック
 		assert(m_pRenderer != nullptr);
 
-		if (FAILED(m_pRenderer->Init(hWnd, !FULL_SCREEN)))
+		bool window = true; // ウインドウモードにするかどうか
+
+#ifdef _DEBUG
+		window = true;
+#else
+		window = false;
+#endif
+
+		if (FAILED(m_pRenderer->Init(hWnd, window)))
 		{// 初期化
 			return S_FALSE;
 		}
@@ -138,7 +145,7 @@ void CApplication::Uninit()
 
 	if (m_pTexture != nullptr)
 	{// nullチェック
-		m_pTexture->ReleaseAll();
+		//m_pTexture->ReleaseAll();
 		delete m_pTexture;
 		m_pTexture = nullptr;
 	}

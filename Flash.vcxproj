@@ -158,6 +158,7 @@
     <ClCompile Include="directinput.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="inputcontroller.cpp" />
     <ClCompile Include="inputjoypad.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="directinput.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="inputcontroller.h" />
     <ClInclude Include="inputjoypad.h" />

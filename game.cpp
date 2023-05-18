@@ -13,6 +13,7 @@
 #include "application.h"
 #include "fade.h"
 #include "time.h"
+#include "image.h"
 
 //==================================================
 // 定義
@@ -24,7 +25,8 @@ namespace
 //--------------------------------------------------
 // デフォルトコンストラクタ
 //--------------------------------------------------
-CGame::CGame()
+CGame::CGame() :
+	m_pTime(nullptr)
 {
 }
 
@@ -53,14 +55,14 @@ void CGame::Init()
 		pObj->SetSize(D3DXVECTOR3(width, height, 0.0f));
 
 		// 色の設定
-		pObj->SetCol(D3DXCOLOR(0.75f, 0.75f, 0.75f, 1.0f));
-
-		// テクスチャの設定
-		//pObj->SetTexture(CTexture::LABEL_TITLE_BG);
+		pObj->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 
 	// タイムの生成
-	CTime::Create();
+	m_pTime = CTime::Create();
+
+	// 画像の生成
+	CImage::Create();
 }
 
 //--------------------------------------------------
@@ -86,6 +88,14 @@ void CGame::Update()
 //--------------------------------------------------
 void CGame::Draw()
 {
+}
+
+//--------------------------------------------------
+// 切り替わったかどうか
+//--------------------------------------------------
+bool CGame::Switch()
+{
+	return m_pTime->Switch();
 }
 
 //--------------------------------------------------

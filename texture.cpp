@@ -71,7 +71,6 @@ void CTexture::Load(ELabel label)
 
 	string path = FILE_PATH + TEXTURE_NAME[label];
 
-	// テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
 		path.c_str(),
 		&m_pTexture[label]);

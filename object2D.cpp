@@ -24,7 +24,6 @@ struct VERTEX
 	D3DXVECTOR2 tex;
 };
 
-
 // 頂点フォーマット
 const DWORD FVF_VERTEX = (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1);
 const int NUM_VERTEX = 4;		// 頂点の数
@@ -59,7 +58,7 @@ CObject2D* CObject2D::Create()
 //--------------------------------------------------
 CObject2D::CObject2D(CObject::EPriority prio) : CObject(prio),
 	m_pVtxBuff(nullptr),
-	m_texture(CTexture::LABEL_NONE),
+	m_pTexture(nullptr),
 	m_pos(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
 	m_size(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
 	m_col(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)),
@@ -81,7 +80,7 @@ CObject2D::~CObject2D()
 //--------------------------------------------------
 void CObject2D::Init()
 {
-	m_texture = CTexture::LABEL_NONE;
+	m_pTexture = nullptr;
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_size = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
@@ -144,6 +143,11 @@ void CObject2D::Uninit()
 		m_pVtxBuff = nullptr;
 	}
 
+	if (m_pTexture != nullptr)
+	{// テクスチャの破棄
+		m_pTexture = nullptr;
+	}
+
 	// 解放
 	Release();
 }
@@ -177,10 +181,8 @@ void CObject2D::Draw()
 	// 頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX);
 
-	CTexture* pTexture = CApplication::GetInstance()->GetTexture();
-	 
 	// テクスチャの設定
-	pDevice->SetTexture(0, pTexture->Get(m_texture));
+	pDevice->SetTexture(0, m_pTexture);
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(
@@ -297,7 +299,17 @@ bool CObject2D::GetDraw()
 //--------------------------------------------------
 void CObject2D::SetTexture(CTexture::ELabel texture)
 {
-	m_texture = texture;
+	CTexture* pTexture = CApplication::GetInstance()->GetTexture();
+
+	m_pTexture = pTexture->Get(texture);
+}
+
+//--------------------------------------------------
+// テクスチャの設定
+//--------------------------------------------------
+void CObject2D::SetTexture(LPDIRECT3DTEXTURE9 pTexture)
+{
+	m_pTexture = pTexture;
 }
 
 //--------------------------------------------------

@@ -88,6 +88,9 @@
     <ClCompile Include="time.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h">
@@ -152,6 +155,9 @@
       <Filter>System\Mode</Filter>
     </ClInclude>
     <ClInclude Include="time.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
