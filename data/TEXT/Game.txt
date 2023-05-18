@@ -16,7 +16,7 @@ NUM_TEXTURE = 4
 #------------------------------------------------------------------------------
 # テクスチャ名
 #------------------------------------------------------------------------------
-TEXTURE_NAME = 1.png
-TEXTURE_NAME = 2.png
-TEXTURE_NAME = 3.jpg
-TEXTURE_NAME = 4.png
+TEXTURE_NAME = 1-e1542693524581.jpg
+TEXTURE_NAME = 510534.jpg
+TEXTURE_NAME = 133334564.png
+TEXTURE_NAME = 1641462092066.jpg

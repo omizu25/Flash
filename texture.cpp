@@ -22,6 +22,7 @@ const string TEXTURE_NAME[] =
 	"Number.png",		// 数字
 	"Cursor.png",		// カーソル
 	"PressEnter.png",	// プレスエンター
+	"Fire.png",			// 炎
 };
 }
 

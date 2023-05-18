@@ -26,6 +26,14 @@ const string TEXT_PATH = "data/TEXT/Game.txt";		// テキストのファイルパス
 const string TEXTURE_PATH = "data/TEXTURE/Game/";	// テクスチャのファイルパス
 }
 
+//==================================================
+// 静的メンバ変数
+//==================================================
+string* CImage::m_pPath = nullptr;		// テクスチャのパス
+int* CImage::m_pUsed = nullptr;			// 使用した数字
+int CImage::m_switchMax = ERROR_NUMBER;	// 切り替わる最大数
+int CImage::m_num = ERROR_NUMBER;		// テクスチャの数
+
 //--------------------------------------------------
 // 生成
 //--------------------------------------------------
@@ -44,127 +52,10 @@ CImage* CImage::Create()
 	// 初期化
 	pImage->Init();
 
-	// 読み込み
-	pImage->Load();
-
 	// 切り替え
 	pImage->Switch();
 
 	return pImage;
-}
-
-//--------------------------------------------------
-// デフォルトコンストラクタ
-//--------------------------------------------------
-CImage::CImage() :
-	m_pTexture(nullptr),
-	m_pPath(nullptr),
-	m_pUsed(nullptr),
-	m_switchMax(0),
-	m_switch(0),
-	m_num(0),
-	m_index(0)
-{
-}
-
-//--------------------------------------------------
-// デストラクタ
-//--------------------------------------------------
-CImage::~CImage()
-{
-	assert(m_pUsed == nullptr);
-	assert(m_pPath == nullptr);
-	assert(m_pTexture == nullptr);
-}
-
-//--------------------------------------------------
-// 初期化
-//--------------------------------------------------
-void CImage::Init()
-{
-	m_pTexture = nullptr;
-	m_pPath = nullptr;
-	m_pUsed = nullptr;
-	m_switchMax = ERROR_NUMBER;
-	m_switch = 0;
-	m_num = ERROR_NUMBER;
-	m_index = -1;
-
-	// 初期化
-	CObject2D::Init();
-
-	D3DXVECTOR3 pos = D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, (float)CApplication::SCREEN_HEIGHT * 0.6f, 0.0f);
-
-	// 位置の設定
-	CObject2D::SetPos(pos);
-
-	D3DXVECTOR3 size = D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.75f, (float)CApplication::SCREEN_HEIGHT * 0.75f, 0.0f);
-
-	// サイズの設定
-	CObject2D::SetSize(size);
-}
-
-//--------------------------------------------------
-// 終了
-//--------------------------------------------------
-void CImage::Uninit()
-{
-	if (m_pTexture != nullptr)
-	{// テクスチャの破棄
-		m_pTexture->Release();
-		m_pTexture = nullptr;
-	}
-
-	if (m_pPath != nullptr)
-	{// nullチェック
-		delete[] m_pPath;
-		m_pPath = nullptr;
-	}
-
-	if (m_pUsed != nullptr)
-	{// nullチェック
-		delete[] m_pUsed;
-		m_pUsed = nullptr;
-	}
-
-	// 終了
-	CObject2D::Uninit();
-}
-
-//--------------------------------------------------
-// 更新
-//--------------------------------------------------
-void CImage::Update()
-{
-	// 更新
-	CObject2D::Update();
-
-	CGame* pGame = (CGame*)CApplication::GetInstance()->GetMode();
-	
-	if (!pGame->Switch())
-	{// 切り替わっていない
-		return;
-	}
-
-	if (m_switch >= m_switchMax || m_switch >= m_num)
-	{// 切り替え終わった
-		// モードの変更
-		CApplication::GetInstance()->GetFade()->ChangeMode(CMode::MODE_TITLE);
-
-		return;
-	}
-	
-	// 切り替え
-	Switch();
-}
-
-//--------------------------------------------------
-// 描画
-//--------------------------------------------------
-void CImage::Draw()
-{
-	// 描画
-	CObject2D::Draw();
 }
 
 //--------------------------------------------------
@@ -177,7 +68,7 @@ void CImage::Load()
 
 	// ウインドウ情報の取得
 	HWND hWnd = CApplication::GetInstance()->GetWnd();
-	
+
 	if (pFile == nullptr)
 	{// nullチェック
 		assert(false);
@@ -222,7 +113,7 @@ void CImage::Load()
 
 			{// 使用した
 				m_pUsed = new int[m_num];
-			
+
 				if (m_pUsed == nullptr)
 				{// nullチェック
 					assert(false);
@@ -299,6 +190,121 @@ void CImage::Load()
 		// モードの変更
 		CApplication::GetInstance()->GetFade()->ChangeMode(CMode::MODE_TITLE);
 	}
+}
+
+//--------------------------------------------------
+// 解放
+//--------------------------------------------------
+void CImage::Release()
+{
+	if (m_pPath != nullptr)
+	{// nullチェック
+		delete[] m_pPath;
+		m_pPath = nullptr;
+	}
+
+	if (m_pUsed != nullptr)
+	{// nullチェック
+		delete[] m_pUsed;
+		m_pUsed = nullptr;
+	}
+}
+
+//--------------------------------------------------
+// デフォルトコンストラクタ
+//--------------------------------------------------
+CImage::CImage() :
+	m_pTexture(nullptr),
+	m_switch(0),
+	m_index(0)
+{
+}
+
+//--------------------------------------------------
+// デストラクタ
+//--------------------------------------------------
+CImage::~CImage()
+{
+	assert(m_pTexture == nullptr);
+}
+
+//--------------------------------------------------
+// 初期化
+//--------------------------------------------------
+void CImage::Init()
+{
+	m_pTexture = nullptr;
+	m_switch = 0;
+	m_index = -1;
+
+	for (int i = 0; i < m_num; i++)
+	{
+		m_pUsed[i] = -1;
+	}
+
+	// 初期化
+	CObject2D::Init();
+
+	D3DXVECTOR3 pos = D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, (float)CApplication::SCREEN_HEIGHT * 0.6f, 0.0f);
+
+	// 位置の設定
+	CObject2D::SetPos(pos);
+
+	D3DXVECTOR3 size = D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.75f, (float)CApplication::SCREEN_HEIGHT * 0.75f, 0.0f);
+
+	// サイズの設定
+	CObject2D::SetSize(size);
+}
+
+//--------------------------------------------------
+// 終了
+//--------------------------------------------------
+void CImage::Uninit()
+{
+	if (m_pTexture != nullptr)
+	{// テクスチャの破棄
+		m_pTexture->Release();
+		m_pTexture = nullptr;
+	}
+
+	// 終了
+	CObject2D::Uninit();
+}
+
+//--------------------------------------------------
+// 更新
+//--------------------------------------------------
+void CImage::Update()
+{
+	// 更新
+	CObject2D::Update();
+
+	CGame* pGame = (CGame*)CApplication::GetInstance()->GetMode();
+	
+	if (!pGame->Switch())
+	{// 切り替わっていない
+		return;
+	}
+
+	if (m_switch >= m_switchMax || m_switch >= m_num)
+	{// 切り替え終わった
+		// モードの変更
+		CApplication::GetInstance()->GetFade()->ChangeMode(CMode::MODE_TITLE);
+
+		return;
+	}
+	
+	// 切り替え
+	Switch();
+}
+
+//--------------------------------------------------
+// 描画
+//--------------------------------------------------
+void CImage::Draw()
+{
+	// 描画
+	CObject2D::Draw();
 }
 
 //--------------------------------------------------

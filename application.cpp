@@ -15,6 +15,7 @@
 #include "texture.h"
 #include "mode.h"
 #include "fade.h"
+#include "image.h"
 
 //==================================================
 // 定義
@@ -115,6 +116,9 @@ HRESULT CApplication::Init(HINSTANCE hInstance, HWND hWnd)
 		m_pFade->Init();
 	}
 
+	// 画像の読み込み
+	CImage::Load();
+
 	m_hWnd = hWnd;
 	m_mode = START_MODE;
 
@@ -135,6 +139,9 @@ void CApplication::Uninit()
 	// 全ての解放
 	CObject::ReleaseAll();
 
+	// 画像の解放
+	CImage::Release();
+
 	m_pMode = nullptr;
 
 	if (m_pFade != nullptr)
@@ -145,7 +152,7 @@ void CApplication::Uninit()
 
 	if (m_pTexture != nullptr)
 	{// nullチェック
-		//m_pTexture->ReleaseAll();
+		m_pTexture->ReleaseAll();
 		delete m_pTexture;
 		m_pTexture = nullptr;
 	}

@@ -59,12 +59,12 @@ void CTitle::Init()
 		pObj->SetCol(D3DXCOLOR(0.75f, 0.75f, 0.75f, 1.0f));
 
 		// テクスチャの設定
-		//pObj->SetTexture(CTexture::LABEL_TITLE_BG);
+		pObj->SetTexture(CTexture::LABEL_Fire);
 	}
 
 	{// メニュー
 		D3DXVECTOR3 pos = D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, (float)CApplication::SCREEN_HEIGHT * 0.75f, 0.0f);
-		D3DXVECTOR3 size = D3DXVECTOR3(650.0f, 100.0f, 0.0f);
+		D3DXVECTOR3 size = D3DXVECTOR3(600.0f, 250.0f, 0.0f);
 
 		// 生成
 		m_pMenu = CMenu::Create(pos, size, 1, 50.0f);

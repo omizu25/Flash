@@ -55,7 +55,10 @@ void CGame::Init()
 		pObj->SetSize(D3DXVECTOR3(width, height, 0.0f));
 
 		// 色の設定
-		pObj->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		pObj->SetCol(D3DXCOLOR(0.75f, 0.75f, 0.75f, 1.0f));
+
+		// テクスチャの設定
+		pObj->SetTexture(CTexture::LABEL_Fire);
 	}
 
 	// タイムの生成

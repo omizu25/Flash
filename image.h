@@ -24,9 +24,18 @@ class CImage : public CObject2D
 	/* ↓定義↓ */
 public:
 
+	/* ↓静的メンバ変数↓ */
+private:
+	static string* m_pPath;	// テクスチャのパス
+	static int* m_pUsed;	// 使用した数字
+	static int m_switchMax;	// 切り替わる最大数
+	static int m_num;		// テクスチャの数
+
 	/* ↓静的メンバ関数↓ */
 public:
 	static CImage* Create();	// 生成
+	static void Load();			// 読み込み
+	static void Release();		// 解放
 
 	/* ↓メンバ関数↓ */
 public:
@@ -40,18 +49,13 @@ public:
 	void Draw() override;	// 描画
 
 private:
-	void Load();	// 読み込み
 	void Switch();	// 切り替え
 	void Random();	// ランダム
 
 	/* ↓メンバ変数↓ */
 private:
 	LPDIRECT3DTEXTURE9 m_pTexture;	// テクスチャの情報
-	string* m_pPath;	// テクスチャのパス
-	int* m_pUsed;		// 使用した
-	int m_switchMax;	// 切り替わる最大数
 	int m_switch;		// 切り替えた数
-	int m_num;			// テクスチャの数
 	int m_index;		// 現在の番号
 };
 

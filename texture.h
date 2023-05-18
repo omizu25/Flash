@@ -20,6 +20,7 @@ public:
 		LABEL_Number = 0,	// 数字
 		LABEL_Cursor,		// カーソル
 		LABEL_PressEnter,	// プレスエンター
+		LABEL_Fire,			// 炎
 		LABEL_MAX
 	};
 
