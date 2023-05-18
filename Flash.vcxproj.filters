@@ -13,5 +13,140 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{0373fd46-18a3-4bea-b165-fd449cc410b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{3c1c1ae0-57d1-4c08-a4d6-ef72922ce1af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Input">
+      <UniqueIdentifier>{728b1e88-ec41-4cad-b772-65c9180b098f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Mode">
+      <UniqueIdentifier>{bf329c3c-f444-4f81-8010-421e3ceebe73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="application.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="directinput.cpp">
+      <Filter>System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>System\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>System\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="inputcontroller.cpp">
+      <Filter>System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="inputjoypad.cpp">
+      <Filter>System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="inputkeyboard.cpp">
+      <Filter>System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="mode.cpp">
+      <Filter>System\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="number.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="number_manager.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="object2D.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="precompile.cpp" />
+    <ClCompile Include="renderer.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>System\Mode</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="application.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="directinput.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>System\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>System\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="inputcontroller.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="inputjoypad.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="inputkeyboard.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="inputkeydata.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="number.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="number_manager.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="object2D.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="mode.h">
+      <Filter>System\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="precompile.h" />
+    <ClInclude Include="renderer.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>System\Mode</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
