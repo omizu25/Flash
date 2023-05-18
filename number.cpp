@@ -28,12 +28,20 @@ CNumber* CNumber::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3& size)
 
 	pNumber = new CNumber;
 
-	if (pNumber != nullptr)
+	if (pNumber == nullptr)
 	{// nullチェック
-		pNumber->Init();
-		pNumber->SetPos(pos);
-		pNumber->SetSize(size);
+		assert(false);
+		return nullptr;
 	}
+
+	// 初期化
+	pNumber->Init();
+
+	// 位置の設定
+	pNumber->SetPos(pos);
+
+	// サイズの設定
+	pNumber->SetSize(size);
 
 	return pNumber;
 }

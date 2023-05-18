@@ -85,6 +85,9 @@
     <ClCompile Include="title.cpp">
       <Filter>System\Mode</Filter>
     </ClCompile>
+    <ClCompile Include="time.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h">
@@ -147,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="title.h">
       <Filter>System\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

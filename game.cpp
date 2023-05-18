@@ -12,6 +12,7 @@
 #include "input.h"
 #include "application.h"
 #include "fade.h"
+#include "time.h"
 
 //==================================================
 // 定義
@@ -57,6 +58,9 @@ void CGame::Init()
 		// テクスチャの設定
 		//pObj->SetTexture(CTexture::LABEL_TITLE_BG);
 	}
+
+	// タイムの生成
+	CTime::Create();
 }
 
 //--------------------------------------------------

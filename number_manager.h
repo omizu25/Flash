@@ -48,6 +48,7 @@ public:
 
 public:
 	void SetPos(const D3DXVECTOR3& pos);	// 位置の設定
+	void SetSize(const D3DXVECTOR3& size);	// サイズの設定
 	void SetCol(const D3DXCOLOR& col);		// 色の設定
 	void SetDraw(bool draw);				// 描画の設定
 	void SetZero(bool zero);				// ゼロの設定

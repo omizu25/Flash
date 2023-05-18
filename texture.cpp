@@ -16,15 +16,16 @@
 //==================================================
 namespace
 {
-const string FILE_PATH[] =
-{// テクスチャのパス
-	"data/TEXTURE/Number.png",		// 数字
-	"data/TEXTURE/Cursor.png",		// カーソル
-	"data/TEXTURE/PressEnter.png",	// プレスエンター
+const string FILE_PATH = "data/TEXTURE/System/";	// ファイルパス
+const string TEXTURE_NAME[] =
+{// テクスチャの名前
+	"Number.png",		// 数字
+	"Cursor.png",		// カーソル
+	"PressEnter.png",	// プレスエンター
 };
 }
 
-static_assert(sizeof(FILE_PATH) / sizeof(FILE_PATH[0]) == CTexture::LABEL_MAX, "aho");
+static_assert(sizeof(TEXTURE_NAME) / sizeof(TEXTURE_NAME[0]) == CTexture::LABEL_MAX, "aho");
 
 //--------------------------------------------------
 // デフォルトコンストラクタ
@@ -68,9 +69,11 @@ void CTexture::Load(ELabel label)
 	// デバイスへのポインタの取得
 	LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetDevice();
 
+	string path = FILE_PATH + TEXTURE_NAME[label];
+
 	// テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		FILE_PATH[label].c_str(),
+		path.c_str(),
 		&m_pTexture[label]);
 }
 

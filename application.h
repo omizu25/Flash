@@ -53,6 +53,7 @@ public:
 public:
 	CMode::EMode GetModeEnum();
 	void SetMode(CMode::EMode mode);	// モードの設定
+	HWND GetWnd();						// ウインドウ情報の取得
 	LPDIRECT3DDEVICE9 GetDevice();		// デバイスの取得
 	CRenderer* GetRenderer();			// レンダラーの取得
 	CTexture* GetTexture();				// テクスチャの取得
@@ -61,6 +62,7 @@ public:
 
 	/* ↓メンバ変数↓ */
 private:
+	HWND m_hWnd;			// ウインドウ情報
 	CMode::EMode m_mode;	// 現在のモード
 	CRenderer* m_pRenderer;	// レンダラーの情報
 	CTexture* m_pTexture;	// テクスチャの情報

@@ -10,6 +10,7 @@
 //==================================================
 #include "number_manager.h"
 #include "number.h"
+#include "application.h"
 #include "utility.h"
 
 //==================================================
@@ -28,26 +29,23 @@ CNumberManager* CNumberManager::Create(const D3DXVECTOR3& pos, const D3DXVECTOR3
 
 	pNumberManager = new CNumberManager;
 
-	if (pNumberManager != nullptr)
+	if (pNumberManager == nullptr)
 	{// nullチェック
-		float halfWidth = size.x * 0.5f;
-
-		float posX = 0.0f;
-
-		for (int i = 0; i < MAX_DIGIT; i++)
-		{
-			posX = pos.x - (halfWidth + (size.x * i));
-
-			// 生成
-			pNumberManager->m_pNumber[i] = CNumber::Create(D3DXVECTOR3(posX, pos.y, 0.0f), size);
-		}
-
-		// 初期化
-		pNumberManager->Init();
-
-		// 数の設定
-		pNumberManager->Set(value);
+		assert(false);
+		return nullptr;
 	}
+
+	// 初期化
+	pNumberManager->Init();
+
+	// 位置の設定
+	pNumberManager->SetPos(pos);
+
+	// サイズの設定
+	pNumberManager->SetSize(size);
+
+	// 数の設定
+	pNumberManager->Set(value);
 
 	return pNumberManager;
 }
@@ -85,10 +83,19 @@ CNumberManager::~CNumberManager()
 void CNumberManager::Init()
 {
 	m_value = 0;
-	m_interval = 0;
+	m_interval = 1;
 	m_width = 0.0f;
 	m_zero = false;
 	m_zeroDigit = MAX_DIGIT;
+
+	D3DXVECTOR3 size = D3DXVECTOR3(50.0f, 100.0f, 0.0f);
+	D3DXVECTOR3 pos = D3DXVECTOR3((float)CApplication::SCREEN_WIDTH - (size.x * 0.5f), size.y * 0.5f, 0.0f);
+
+	for (int i = 0; i < MAX_DIGIT; i++)
+	{
+		// 生成
+		m_pNumber[i] = CNumber::Create(pos, size);
+	}
 
 	// 変更
 	Change();
@@ -209,6 +216,27 @@ void CNumberManager::SetPos(const D3DXVECTOR3& pos)
 		// 位置の設定
 		m_pNumber[i]->SetPos(D3DXVECTOR3(posX, pos.y, 0.0f));
 	}
+}
+
+//--------------------------------------------------
+// サイズの設定
+//--------------------------------------------------
+void CNumberManager::SetSize(const D3DXVECTOR3& size)
+{
+	for (int i = 0; i < MAX_DIGIT; i++)
+	{
+		// サイズの設定
+		m_pNumber[i]->SetSize(size);
+	}
+
+	// 位置の取得
+	D3DXVECTOR3 pos = m_pNumber[0]->GetPos();
+
+	// 位置の補正
+	pos.x += size.x * 0.5f;
+
+	// 位置の設定
+	SetPos(pos);
 }
 
 //--------------------------------------------------
